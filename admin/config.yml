@@ -1,0 +1,1415 @@
+backend:
+  name: git-gateway
+  accept_roles:
+    - admin
+    - editor
+media_folder: theme/assets/images
+public_folder: /assets/images
+collections:
+  - name: pages
+    label: Pages
+    identifier_field: title
+    extension: md
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    folder: cms/pages
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '{{slug}}.html'
+      - &ref_0
+        label: Seo
+        name: seo
+        widget: object
+        collapsed: true
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: false
+          - label: Description
+            name: description
+            widget: string
+            required: false
+          - label: No index
+            name: noindex
+            widget: boolean
+            default: false
+            required: false
+          - label: Open Graph Title
+            name: og:title
+            widget: string
+            required: false
+          - label: Open Graph Image
+            name: og:image
+            widget: image
+            required: false
+            media_library:
+              config:
+                multiple: false
+          - label: Twitter Title
+            name: twitter:title
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Card
+            name: twitter:card
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Site
+            name: twitter:site
+            widget: string
+            required: false
+          - label: Twitter Creator
+            name: twitter:creator
+            widget: string
+            required: false
+          - label: Additional HTML tags
+            name: additional_tags
+            widget: text
+            required: false
+  - name: cursuri
+    label: Courses
+    folder: cms/cursuri
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Problem description
+        name: body
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_short-description
+        label: Short Description
+        widget: string
+        required: true
+      - hint: ''
+        name: f_icon
+        label: Icon
+        widget: text
+        required: false
+      - hint: ''
+        name: f_sorting-order
+        label: Sorting Order
+        widget: number
+        required: true
+      - hint: ''
+        name: f_course-main-banner-image
+        label: Course main banner image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_who-is-this-for-heading
+        label: Who is this for heading
+        widget: string
+        required: false
+      - hint: ''
+        name: f_solution-heading
+        label: Solution heading
+        widget: string
+        required: false
+      - hint: ''
+        name: f_solution-description
+        label: Solution description
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_what-you-learn-1
+        label: What you learn 1
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_large-teaser-image-1
+        label: Large teaser image 1
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_large-teaser-image-1-alt
+        label: Large teaser image 1 alt
+        widget: string
+        required: false
+      - hint: ''
+        name: f_durata-subtitlu
+        label: Durata   subtitlu
+        widget: string
+        required: false
+      - hint: ''
+        name: f_durata
+        label: Durată
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_program
+        label: Program
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_marime-grupa
+        label: Marime grupa
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_pret-si-inscriere
+        label: Pret si inscriere
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_cunostinte-necesare
+        label: Cunostinte necesare
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_echipamente-necesare
+        label: Echipamente necesare
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_video
+        label: Video
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Url
+            widget: string
+            required: false
+      - hint: ''
+        name: f_profesor
+        label: Profesor
+        widget: relation
+        required: true
+        collection: echipa
+        value_field: cms/echipa/{{slug}}.md
+        search_fields:
+          - slug
+          - name
+        display_fields:
+          - title
+        multiple: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: cursuri
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[cursuri].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: marturii
+    label: Testimonials
+    folder: cms/marturii
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: f_person-title-role-job
+        label: Person title / role / job
+        widget: string
+        required: true
+      - hint: ''
+        name: f_person-photo-avatar
+        label: Person photo / avatar
+        widget: object
+        required: true
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: true
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_testimonial-text
+        label: Testimonial text
+        widget: text
+        required: true
+      - hint: ''
+        name: f_short-tstimonial-text-3
+        label: Short tstimonial text
+        widget: text
+        required: true
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: marturii
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[marturii].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: echipa
+    label: Staff
+    folder: cms/echipa
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Bio
+        name: body
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_order
+        label: Order
+        widget: number
+        required: true
+      - hint: ''
+        name: f_title
+        label: Title
+        widget: string
+        required: false
+      - hint: ''
+        name: f_photo
+        label: Photo
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: echipa
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[echipa].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: blog
+    label: Posts
+    folder: cms/blog
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Post content
+        name: body
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_post-date
+        label: Post Date
+        widget: datetime
+        required: true
+      - hint: ''
+        name: f_author
+        label: Author
+        widget: relation
+        required: true
+        collection: echipa
+        value_field: cms/echipa/{{slug}}.md
+        search_fields:
+          - slug
+          - name
+        display_fields:
+          - title
+        multiple: false
+      - hint: ''
+        name: f_excerpt-short-description-of-the-blog-post-content
+        label: Excerpt (short description of the blog post content)
+        widget: string
+        required: false
+      - hint: ''
+        name: f_post-main-image
+        label: Post main image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_1st-sharable-social-image-from-post
+        label: 1st sharable social image from post
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_seo-description
+        label: Seo description
+        widget: string
+        required: false
+      - hint: ''
+        name: f_plain-text-article-body-for-microdata
+        label: Plain text article body (for microdata)
+        widget: string
+        required: false
+      - hint: ''
+        name: f_catgegory
+        label: Catgegory
+        widget: select
+        required: true
+        options:
+          - label: Ghid
+            value: Ghid
+          - label: Anunț
+            value: Anunț
+          - label: Opinie
+            value: Opinie
+          - label: Articol
+            value: Articol
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: blog
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[blog].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - label: Theme Settings
+    name: settings
+    identifier_field: title
+    extension: json
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    files:
+      - label: General
+        name: site
+        file: cms/_data/settings/site.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: General
+          - hint: Full domain url (needed for a correct sitemap file)
+            name: domain
+            label: Domain
+            widget: string
+            required: false
+          - name: favicon
+            label: Favicon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: apple_touch_icon
+            label: Apple Touch Icon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: header_additional_content
+            label: Additional Content Header
+            hint: Content here will be placed before </head> tag
+            widget: text
+            required: false
+          - name: footer_additional_content
+            label: Additional Content Footer
+            hint: Content here will be placed before </body> tag
+            widget: text
+            required: false
+          - name: images_optimization
+            label: Images Optimization
+            widget: object
+            collapsed: false
+            fields:
+              - label: Image Formats
+                name: formats
+                widget: select
+                multiple: true
+                options:
+                  - label: Avif
+                    value: avif
+                  - label: Webp
+                    value: webp
+              - label: Image Dimensions
+                name: dimensions
+                widget: select
+                multiple: true
+                options:
+                  - label: '500'
+                    value: 500
+                  - label: '800'
+                    value: 800
+                  - label: '1080'
+                    value: 1080
+                  - label: '1600'
+                    value: 1600
+                  - label: '2000'
+                    value: 2000
+                  - label: '2600'
+                    value: 2600
+      - label: Colors
+        name: colors
+        file: cms/_data/colors.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Colors
+      - label: Texts
+        name: texts
+        file: cms/_data/texts.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Texts
+          - hint: 'Original text: Cursuri, key: -599af9c7'
+            label: Text
+            name: '-599af9c7'
+            widget: string
+          - hint: 'Original text: Solution 1, key: 49a1b36a'
+            label: Text
+            name: 49a1b36a
+            widget: string
+          - hint: >-
+              Original text: Aliquet tellus imperdiet morbi tincidunt gravida
+              nulla. Vitae cum vel vulputate at mauris., key: 3d795323
+            label: Text
+            name: 3d795323
+            widget: string
+          - hint: 'Original text: Text Link, key: 3610230d'
+            label: Text
+            name: 3610230d
+            widget: string
+          - hint: 'Original text: Solution 2, key: 49a1b36b'
+            label: Text
+            name: 49a1b36b
+            widget: string
+          - hint: 'Original text: Solution 3, key: 49a1b36c'
+            label: Text
+            name: 49a1b36c
+            widget: string
+          - hint: 'Original text: Solution 4, key: 49a1b36d'
+            label: Text
+            name: 49a1b36d
+            widget: string
+          - hint: 'Original text: Cursuri cum n-ai mai văzut, key: 5680ca74'
+            label: Text
+            name: 5680ca74
+            widget: string
+          - hint: 'Original text: No items found., key: 3d503d2b'
+            label: Text
+            name: 3d503d2b
+            widget: string
+          - hint: 'Original text: Despre Noi, key: -6759887'
+            label: Text
+            name: '-6759887'
+            widget: string
+          - hint: "Original text: Info\_Cursuri, key: 5dfd3c67"
+            label: Text
+            name: 5dfd3c67
+            widget: string
+          - hint: 'Original text: De ce am nevoie pentru curs?, key: -75571797'
+            label: Text
+            name: '-75571797'
+            widget: string
+          - hint: 'Original text: Cursuri online, key: 169d561a'
+            label: Text
+            name: 169d561a
+            widget: string
+          - hint: 'Original text: Cursuri în persoană, key: 6191c716'
+            label: Text
+            name: 6191c716
+            widget: string
+          - hint: 'Original text: Întrebări frecvente, key: 1ad3c6e5'
+            label: Text
+            name: 1ad3c6e5
+            widget: string
+          - hint: 'Original text: Tridia, key: -6a3134ef'
+            label: Text
+            name: '-6a3134ef'
+            widget: string
+          - hint: 'Original text: Echipă, key: 7b625912'
+            label: Text
+            name: 7b625912
+            widget: string
+          - hint: 'Original text: Locație, key: 776aa796'
+            label: Text
+            name: 776aa796
+            widget: string
+          - hint: 'Original text: De pe blog, key: 31abf66e'
+            label: Text
+            name: 31abf66e
+            widget: string
+          - hint: 'Original text: Ghid, key: 21d9dc'
+            label: Text
+            name: 21d9dc
+            widget: string
+          - hint: >-
+              Original text: Resurse pentru programele de grafică 3D, key:
+              447eba02
+            label: Text
+            name: 447eba02
+            widget: string
+          - hint: 'Original text: 15 Septembrie, key: -54607afa'
+            label: Text
+            name: '-54607afa'
+            widget: string
+          - hint: 'Original text: Alex Meseșan, key: 3ded59da'
+            label: Text
+            name: 3ded59da
+            widget: string
+          - hint: 'Original text: Citește, key: -6df9268d'
+            label: Text
+            name: '-6df9268d'
+            widget: string
+          - hint: 'Original text: Întrebări Frecvente, key: -6dba193b'
+            label: Text
+            name: '-6dba193b'
+            widget: string
+          - hint: 'Original text: Blog, key: 1fa3c2'
+            label: Text
+            name: 1fa3c2
+            widget: string
+          - hint: 'Original text: Contact, key: -64104400'
+            label: Text
+            name: '-64104400'
+            widget: string
+          - hint: 'Original text: Înscriere, key: 64a6ba11'
+            label: Text
+            name: 64a6ba11
+            widget: string
+          - hint: 'Original text: Cursuri specializate, key: -5798b2d1'
+            label: Text
+            name: '-5798b2d1'
+            widget: string
+          - hint: 'Original text: de , key: 183bf'
+            label: Text
+            name: 183bf
+            widget: string
+          - hint: 'Original text: grafică 3D, key: 7929b918'
+            label: Text
+            name: 7929b918
+            widget: string
+          - hint: 'Original text: ., key: 2e'
+            label: Text
+            name: 2e
+            widget: string
+          - hint: "Original text: pentru Designeri de Interior, Arhitecți și\_Game Art Designeri , key: 12b03cee"
+            label: Text
+            name: 12b03cee
+            widget: string
+          - hint: "Original text: Vezi\_Cursurile, key: 5cc8990"
+            label: Text
+            name: 5cc8990
+            widget: string
+          - hint: 'Original text: de grafică 3D, key: 4a04da17'
+            label: Text
+            name: 4a04da17
+            widget: string
+          - hint: 'Original text: Vezi Cursurile, key: -1eec05f0'
+            label: Text
+            name: '-1eec05f0'
+            widget: string
+          - hint: 'Original text: “Cea mai , key: 7b9c6ce8'
+            label: Text
+            name: 7b9c6ce8
+            widget: string
+          - hint: 'Original text: smart, key: 68795c9'
+            label: Text
+            name: 68795c9
+            widget: string
+          - hint: 'Original text:  alegere pe care am făcut-o.”, key: -71f05265'
+            label: Text
+            name: '-71f05265'
+            widget: string
+          - hint: >-
+              Original text: "Apreciez super buna organizare, ajutorul când a
+              fost nevoie și atenția ta la detalii.", key: -f78545b
+            label: Text
+            name: '-f78545b'
+            widget: string
+          - hint: 'Original text: Vezi mai multe mărturii, key: 1015194d'
+            label: Text
+            name: 1015194d
+            widget: string
+          - hint: 'Original text: Andreea Natalia Arvatu Iovănel, , key: -5e142357'
+            label: Text
+            name: '-5e142357'
+            widget: string
+          - hint: "Original text: Designer Interior &\_Owner, key: 244933be"
+            label: Text
+            name: 244933be
+            widget: string
+          - hint: 'Original text: AINA Domus Interior, key: -7ca32a6b'
+            label: Text
+            name: '-7ca32a6b'
+            widget: string
+          - hint: 'Original text: Misiunea Noastră, key: -1722d687'
+            label: Text
+            name: '-1722d687'
+            widget: string
+          - hint: "Original text: Un nou standard al educației în designul\_3D., key: 7db76193"
+            label: Text
+            name: 7db76193
+            widget: string
+          - hint: 'Original text: Gata de angajare, key: 2959cef7'
+            label: Text
+            name: 2959cef7
+            widget: string
+          - hint: >-
+              Original text: Se caută oameni pricepuți în 3D. Noi îi creăm, prin
+              cursurile noastre. Dacă nu te va ajuta practic la job, nu o
+              includem în curs. Și facem multă practică, modelată după probleme
+              reale de la job., key: 4c119937
+            label: Text
+            name: 4c119937
+            widget: text
+          - hint: >-
+              Original text: Cursuri predate de veterani în domeniu, key:
+              -4b188ddc
+            label: Text
+            name: '-4b188ddc'
+            widget: string
+          - hint: "Original text: \"Cine nu se pricepe să facă, predă\". Din păcate foarte adevărat în multe cazuri - nu și la noi. Toți profesorii noștri sunt, \_în primul rând, , key: 61343b14"
+            label: Text
+            name: 61343b14
+            widget: text
+          - hint: 'Original text: profesioniști , key: -61fccc6'
+            label: Text
+            name: '-61fccc6'
+            widget: string
+          - hint: 'Original text: veterani în domeniile lor., key: -3391435b'
+            label: Text
+            name: '-3391435b'
+            widget: string
+          - hint: >-
+              Original text: Sună interesant? Te așteptăm, ca și cursant sau
+              colaborator., key: 293e42ba
+            label: Text
+            name: 293e42ba
+            widget: string
+          - hint: 'Original text: Hai să stăm de vorbă, key: -3df70fd0'
+            label: Text
+            name: '-3df70fd0'
+            widget: string
+          - hint: >-
+              Original text: De ce sunt cursurile noastre "altfel", key:
+              10ab10ef
+            label: Text
+            name: 10ab10ef
+            widget: string
+          - hint: "Original text: Creăm un nou standard al educației în domeniul graficii 3D, fotografiei \_și domeniilor conexe., key: -65427776"
+            label: Text
+            name: '-65427776'
+            widget: text
+          - hint: 'Original text: 🎯, key: 1b0ef3'
+            label: Text
+            name: 1b0ef3
+            widget: string
+          - hint: 'Original text: fără , key: 614e4f2'
+            label: Text
+            name: 614e4f2
+            widget: string
+          - hint: 'Original text: "bla bla", key: 6de21cf6'
+            label: Text
+            name: 6de21cf6
+            widget: string
+          - hint: >-
+              Original text: Am gândit o programă minimalistă. După care am
+              pus-o la cură de slăbire. A rămas doar ce e , key: 72aaf9b4
+            label: Text
+            name: 72aaf9b4
+            widget: text
+          - hint: 'Original text: cu adevărat valoros , key: 6da0c9d4'
+            label: Text
+            name: 6da0c9d4
+            widget: string
+          - hint: 'Original text: pentru tine., key: -10ce09e0'
+            label: Text
+            name: '-10ce09e0'
+            widget: string
+          - hint: 'Original text: detalii, key: 5cd8fd1e'
+            label: Text
+            name: 5cd8fd1e
+            widget: string
+          - hint: 'Original text: 💪, key: 1b0c0d'
+            label: Text
+            name: 1b0c0d
+            widget: string
+          - hint: 'Original text: muuuultă practică, key: -30d3cc75'
+            label: Text
+            name: '-30d3cc75'
+            widget: string
+          - hint: >-
+              Original text: Jumătate din timp aplicăm ceea ce s-a predat. ,
+              key: ca5766a
+            label: Text
+            name: ca5766a
+            widget: string
+          - hint: 'Original text: Împreună și individual, key: 18872ecf'
+            label: Text
+            name: 18872ecf
+            widget: string
+          - hint: "Original text: .\_Cu întrebări, lămuriri și multe momente de , key: 49717145"
+            label: Text
+            name: '49717145'
+            widget: string
+          - hint: 'Original text: "ahaaaa!"., key: -7690a7fc'
+            label: Text
+            name: '-7690a7fc'
+            widget: string
+          - hint: 'Original text: 🔎, key: 1b0c71'
+            label: Text
+            name: 1b0c71
+            widget: string
+          - hint: 'Original text: atenție individuală, key: 4ea8c3c5'
+            label: Text
+            name: 4ea8c3c5
+            widget: string
+          - hint: 'Original text: Suntem aici pentru tine, cu , key: 4bd29e8e'
+            label: Text
+            name: 4bd29e8e
+            widget: string
+          - hint: >-
+              Original text: îndrumare, răspunsuri, dar mai ales întrebări, key:
+              -2e49e8bc
+            label: Text
+            name: '-2e49e8bc'
+            widget: string
+          - hint: >-
+              Original text:  pe care nu ți le-ai pus încă - pentru că nu știi
+              (destul) 3D., key: 474d9a4f
+            label: Text
+            name: 474d9a4f
+            widget: string
+          - hint: 'Original text: 💼, key: 1b0c1f'
+            label: Text
+            name: 1b0c1f
+            widget: string
+          - hint: 'Original text: pregătit de job, key: -65453522'
+            label: Text
+            name: '-65453522'
+            widget: string
+          - hint: >-
+              Original text: Scopul numărul 1 este să ieși din curs , key:
+              2c149d0c
+            label: Text
+            name: 2c149d0c
+            widget: string
+          - hint: >-
+              Original text: competent și valoros, gata de angajare sau
+              freelancing., key: 65e76205
+            label: Text
+            name: '65e76205'
+            widget: string
+          - hint: >-
+              Original text:  Cererea este mare, daca ai skill-uri reale., key:
+              602e873f
+            label: Text
+            name: 602e873f
+            widget: string
+          - hint: "Original text: Creăm un nou standard al educației în domeniul graficii\_3D și fotografiei., key: 3c0f8882"
+            label: Text
+            name: 3c0f8882
+            widget: string
+          - hint: 'Original text: Se caută oameni pricepuți în 3D, key: 660c8e9a'
+            label: Text
+            name: 660c8e9a
+            widget: string
+          - hint: >-
+              Original text: . Noi îi creăm, prin cursurile noastre. Scopul
+              numărul 1 este să ieși din curs , key: -56f7ed0c
+            label: Text
+            name: '-56f7ed0c'
+            widget: string
+          - hint: 'Original text: competent și valoros, key: 6cd0e8cb'
+            label: Text
+            name: 6cd0e8cb
+            widget: string
+          - hint: 'Original text: Cursuri Tridia 2023:, key: -3bc1d82d'
+            label: Text
+            name: '-3bc1d82d'
+            widget: string
+          - hint: 'Original text: Care e cursul potrivit pentru tine?, key: 64058030'
+            label: Text
+            name: '64058030'
+            widget: string
+          - hint: >-
+              Original text: Suntem oricând bucuroși să stăm de vorbă. Pe bune.
+              , key: 724befbc
+            label: Text
+            name: 724befbc
+            widget: string
+          - hint: 'Original text: Suntem mai ciudați așa., key: 6d6b5486'
+            label: Text
+            name: 6d6b5486
+            widget: string
+          - hint: 'Original text: Sună-ne, key: -b2f3d13'
+            label: Text
+            name: '-b2f3d13'
+            widget: string
+          - hint: 'Original text: Ce spun cursanții, key: 56bbdc4f'
+            label: Text
+            name: 56bbdc4f
+            widget: string
+          - hint: >-
+              Original text: Ca să-i mai lăsăm, și pe alții să ne laude 😁, key:
+              12635524
+            label: Text
+            name: '12635524'
+            widget: string
+          - hint: 'Original text: View Customer Stories, key: -739a91f4'
+            label: Text
+            name: '-739a91f4'
+            widget: string
+          - hint: 'Original text: Read Story, key: 2a49eb'
+            label: Text
+            name: 2a49eb
+            widget: string
+          - hint: 'Original text: Hai să ne cunoaștem, key: 3130cbc8'
+            label: Text
+            name: 3130cbc8
+            widget: string
+          - hint: 'Original text: Alexandru Meseșan, key: -c38db88'
+            label: Text
+            name: '-c38db88'
+            widget: string
+          - hint: "Original text: \"Profi\", dar nu \"prof\"\_😎.\_E obsedat de îmbunătățirea programei de curs (e ajunsă la a 6-a versiune). Îi plac întrebările, mai ales la curs. Profesează in 3D de 15 ani și predă de 7., key: -4dfc91e3"
+            label: Text
+            name: '-4dfc91e3'
+            widget: text
+          - hint: 'Original text: Vezi echipa, key: -7752f8e'
+            label: Text
+            name: '-7752f8e'
+            widget: string
+          - hint: 'Original text: Blogul Tridia, key: 5e4b5338'
+            label: Text
+            name: 5e4b5338
+            widget: string
+          - hint: >-
+              Original text: Ghiduri, tutoriale, tips & tricks, noutăți. Tot ce
+              ne trece prin cap ca ți-ar fi util., key: -80996d9
+            label: Text
+            name: '-80996d9'
+            widget: string
+          - hint: 'Original text: Toate postările, key: f1f560a'
+            label: Text
+            name: f1f560a
+            widget: string
+          - hint: 'Original text: -, key: 2d'
+            label: Text
+            name: 2d
+            widget: string
+          - hint: "Original text: Cursuri cum n-ai mai văzut. Pasiune, interes, comunicare, personalizare. Creăm un nou standard al educației în domeniul graficii\_3D și fotografiei., key: -5c3cbaa8"
+            label: Text
+            name: '-5c3cbaa8'
+            widget: text
+          - hint: >-
+              Original text: Newsletter (zero spam, doar chestii utile), key:
+              -58c2ca8b
+            label: Text
+            name: '-58c2ca8b'
+            widget: string
+          - hint: >-
+              Original text: Thank you! Your submission has been received!, key:
+              5a0ea5a1
+            label: Text
+            name: 5a0ea5a1
+            widget: string
+          - hint: >-
+              Original text: Something went wrong, check the validity of your
+              information., key: 68e451b2
+            label: Text
+            name: 68e451b2
+            widget: string
+          - hint: 'Original text: Politică de Confidențialitate, key: -4907e9aa'
+            label: Text
+            name: '-4907e9aa'
+            widget: string
+          - hint: 'Original text: Termeni și Condiții, key: 3a9f2118'
+            label: Text
+            name: 3a9f2118
+            widget: string
+          - hint: 'Original text: Cookies, key: -64062591'
+            label: Text
+            name: '-64062591'
+            widget: string
+          - hint: 'Original text: GDPR, key: 214f9f'
+            label: Text
+            name: 214f9f
+            widget: string
+          - hint: 'Original text: Tridia, 2023, key: -1b7be53c'
+            label: Text
+            name: '-1b7be53c'
+            widget: string
+          - hint: 'Original text: Get a Demo, key: -6a68a174'
+            label: Text
+            name: '-6a68a174'
+            widget: string
+          - hint: 'Original text: Solutions, key: 3c2e81fa'
+            label: Text
+            name: 3c2e81fa
+            widget: string
+          - hint: 'Original text: Link Five, key: 1314b718'
+            label: Text
+            name: 1314b718
+            widget: string
+          - hint: 'Original text: Link Six, key: 4af057bc'
+            label: Text
+            name: 4af057bc
+            widget: string
+          - hint: 'Original text: Link Seven, key: 50378c67'
+            label: Text
+            name: 50378c67
+            widget: string
+          - hint: 'Original text: Link Eight, key: 4f73dce9'
+            label: Text
+            name: 4f73dce9
+            widget: string
+          - hint: 'Original text: Product, key: 50c664cf'
+            label: Text
+            name: 50c664cf
+            widget: string
+          - hint: 'Original text: About Us, key: 645efc51'
+            label: Text
+            name: 645efc51
+            widget: string
+          - hint: 'Original text: Log In, key: -78042c3f'
+            label: Text
+            name: '-78042c3f'
+            widget: string
+          - hint: 'Original text: Primul pas este important, key: -7a78eabe'
+            label: Text
+            name: '-7a78eabe'
+            widget: string
+          - hint: 'Original text: Chiar credem asta, key: 672dfd9e'
+            label: Text
+            name: 672dfd9e
+            widget: string
+          - hint: 'Original text: Programă de curs, key: -682e898f'
+            label: Text
+            name: '-682e898f'
+            widget: string
+          - hint: 'Original text: Ce-o să înveți, key: -69f46a2f'
+            label: Text
+            name: '-69f46a2f'
+            widget: string
+          - hint: "Original text: Preț &\_Înscriere, key: -11a17a11"
+            label: Text
+            name: '-11a17a11'
+            widget: string
+          - hint: 'Original text: pentru cursul de ..., key: -125a9b7d'
+            label: Text
+            name: '-125a9b7d'
+            widget: string
+          - hint: >-
+              Original text: Prețul cursului depinde de modul în care alegi să
+              participi la el:, key: 3d7f6e06
+            label: Text
+            name: 3d7f6e06
+            widget: string
+          - hint: 'Original text: în persoană (Timișoara): , key: -1fb76895'
+            label: Text
+            name: '-1fb76895'
+            widget: string
+          - hint: 'Original text: 1000 RON, key: 21e18270'
+            label: Text
+            name: '21e18270'
+            widget: string
+          - hint: "Original text: prin Zoom (restul\_României): , key: -58cdde43"
+            label: Text
+            name: '-58cdde43'
+            widget: string
+          - hint: "Original text: 900\_RON, key: 1c1a308a"
+            label: Text
+            name: 1c1a308a
+            widget: string
+          - hint: 'Original text: Reducere, key: -29c659c7'
+            label: Text
+            name: '-29c659c7'
+            widget: string
+          - hint: 'Original text: 10%, key: bde6'
+            label: Text
+            name: bde6
+            widget: string
+          - hint: >-
+              Original text:  pentru elevi, studenți și masteranzi., key:
+              179d4bd6
+            label: Text
+            name: 179d4bd6
+            widget: string
+          - hint: >-
+              Original text: Plata se poate face integral sau 50% la înscriere
+              și 50% la jumătatea cursului, după 2 săptămâni., key: 198c5917
+            label: Text
+            name: 198c5917
+            widget: text
+          - hint: 'Original text: 22 Aprilie, key: -2418f7de'
+            label: Text
+            name: '-2418f7de'
+            widget: string
+          - hint: 'Original text: 2023, key: 1774ff'
+            label: Text
+            name: 1774ff
+            widget: string
+          - hint: 'Original text: Tagline, key: 6efaa6e'
+            label: Text
+            name: 6efaa6e
+            widget: string
+          - hint: 'Original text: This is a Heading for your Webisite, key: -5f06835f'
+            label: Text
+            name: '-5f06835f'
+            widget: string
+          - hint: >-
+              Original text: Aliquet tellus imperdiet morbi tincidunt gravida
+              nulla. Vitae cum vel vulputate at mauris. Consectetur integer
+              maecenas lectus lorem dui mattis neque, nibh pellentesque., key:
+              -4b3ea4ce
+            label: Text
+            name: '-4b3ea4ce'
+            widget: text
+          - hint: 'Original text: Learn More, key: -52bd880f'
+            label: Text
+            name: '-52bd880f'
+            widget: string
+      - label: Links
+        name: links
+        file: cms/_data/links.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Links
+          - hint: 'Original link: #, key: 23'
+            label: Link
+            name: '23'
+            widget: string
+          - hint: 'Original link: #marturii, key: 5499c176'
+            label: Link
+            name: 5499c176
+            widget: string
+          - hint: 'Original link: #cursuri, key: 76f590d6'
+            label: Link
+            name: 76f590d6
+            widget: string
+          - hint: 'Original link: tel:0743437074, key: 14ab957a'
+            label: Link
+            name: 14ab957a
+            widget: string
+      - label: Images
+        name: images
+        file: cms/_data/images.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Images
+          - label: Image
+            name: 4bfad150
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-62786ba1'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 1ea93ee
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 1f98fd80
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 3956a658
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 1da823c
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 391682f
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-5be15c7c'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-22d48766'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-13055832'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-1969ece4'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-70f82f4c'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+publish_mode: editorial_workflow
